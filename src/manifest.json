@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "permissions": [
+    "webNavigation"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-tIHN3/DjtliAf0KzUsWdsn18h2v6yo+YNv7ZbkrE2iE='; object-src 'self'",
+  "content_scripts": [
+      {
+        "matches": ["https://docs.google.com/document*"],
+        "js": ["content.bundle.js"]
+      }
+  ]
+}
