@@ -1,1 +1,1 @@
-alert('The skeleton worked!');
+alert('The skeleton worked!')

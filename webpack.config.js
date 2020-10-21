@@ -1,27 +1,24 @@
-var webpack = require("webpack"),
-  path = require("path"),
-  CleanWebpackPlugin = require("clean-webpack-plugin").CleanWebpackPlugin,
-  CopyWebpackPlugin = require("copy-webpack-plugin"),
-  WriteFilePlugin = require("write-file-webpack-plugin");
+var webpack = require('webpack'),
+  path = require('path'),
+  CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin,
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
+  WriteFilePlugin = require('write-file-webpack-plugin')
 
 var options = {
   // Use the content.js file as an entry point 
   entry: {
-    content: path.join(__dirname, "src", "js", "content.ts"),
+    content: path.join(__dirname, 'src', 'js', 'content.ts'),
   },
-  mode: process.env.NODE_ENV || "development",
+  mode: process.env.NODE_ENV || 'development',
   // Write output to a build folder
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "[name].bundle.js"
+    path: path.join(__dirname, 'build'),
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
-      {
-        exclude: /node_modules/,
-        test: /\.ts?$/,
-        use: 'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
-      },
+      // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
+      { test: /\.tsx?$/, loader: 'ts-loader' }
     ],
   },
   plugins: [
@@ -30,7 +27,7 @@ var options = {
     // Generates the manifest file using package.json fields and src/manifest.json content
     new CopyWebpackPlugin({
       patterns: [{
-        from: "src/manifest.json",
+        from: 'src/manifest.json',
         transform: function (content, path) {
           return Buffer.from(JSON.stringify({
             name: process.env.npm_package_name,
@@ -43,6 +40,6 @@ var options = {
     }),
     new WriteFilePlugin()
   ]
-};
+}
 
-module.exports = options;
+module.exports = options
