@@ -2,7 +2,7 @@ export interface Stackish<T> {
   isEmpty: () => boolean;
   size: () => number;
   push: (val: T) => void;
-  pop: () => T | null;
+  pop: () => T | undefined;
 }
 
 export class ScrollTopStack<T = number> implements Stackish<T> {
