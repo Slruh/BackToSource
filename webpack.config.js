@@ -15,6 +15,9 @@ var options = {
     path: path.join(__dirname, 'build'),
     filename: '[name].bundle.js'
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"]
+  },
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
