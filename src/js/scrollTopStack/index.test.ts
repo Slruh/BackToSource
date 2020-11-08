@@ -1,4 +1,4 @@
-import { ScrollTopStack } from "./index";
+import ScrollTopStack from "./index";
 
 test("Verify initial values of a new Stack", () => {
   const stack = new ScrollTopStack();
