@@ -26,6 +26,10 @@ export default class ScrollTopStack<T = number> {
     return null;
   };
 
+  reset = (): void => {
+    this.#stack = [];
+  };
+
   size = (): number => {
     return this.#stack.length;
   };
