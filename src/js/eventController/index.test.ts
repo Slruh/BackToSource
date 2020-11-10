@@ -122,6 +122,7 @@ describe("ExtensionEventController handles clicks", () => {
 
     const footerInstance = MockedFooter.mock.instances[0];
     jest.spyOn(footerInstance, "hide");
+    jest.spyOn(footerInstance, "show");
 
     jest.spyOn(scrollTopStack, "pop");
 
@@ -135,7 +136,32 @@ describe("ExtensionEventController handles clicks", () => {
     expect(MockedFooter).toHaveBeenCalled();
     expect(scrollTopStack.pop).toHaveBeenCalled();
     expect(footerInstance.hide).not.toHaveBeenCalled();
+    expect(footerInstance.show).toHaveBeenCalled();
     expect(scrollTopStack.size()).toStrictEqual(1);
+  });
+
+  test("Click on the close button will reset the stack and hide the footer", () => {
+    const stackValue = 42;
+    scrollTopStack.push(stackValue);
+    scrollTopStack.push(stackValue);
+    const eventController = new ExtensionEventController(
+      scrollTopStack,
+      new Footer(scrollTopStack)
+    );
+
+    const footerInstance = MockedFooter.mock.instances[0];
+    jest.spyOn(footerInstance, "hide");
+    jest.spyOn(scrollTopStack, "reset");
+
+    expect(scrollTopStack.size()).toStrictEqual(2);
+    const eventTarget = document.createElement("a");
+    eventTarget.id = Identifier.Close;
+    eventController.handleClick(eventTarget);
+
+    expect(MockedFooter).toHaveBeenCalled();
+    expect(scrollTopStack.reset).toHaveBeenCalled();
+    expect(footerInstance.hide).toHaveBeenCalled();
+    expect(scrollTopStack.size()).toStrictEqual(0);
   });
 });
 

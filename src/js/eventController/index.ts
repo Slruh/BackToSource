@@ -43,6 +43,13 @@ export default class ExtensionEventController {
 
     const element = target as Element;
 
+    // If the close button is clicked, then remove the footer
+    if (element.id === Identifier.Close) {
+      this.#footer.hide();
+      this.#scrollTopStack.reset();
+      return;
+    }
+
     // Any click besides the link in the footer
     if (
       element.id !== Identifier.Link &&
@@ -66,6 +73,8 @@ export default class ExtensionEventController {
       // Hide the footer if the stack is now empty
       if (this.#scrollTopStack.isEmpty()) {
         this.#footer.hide();
+      } else {
+        this.#footer.show();
       }
     } else {
       console.debug(

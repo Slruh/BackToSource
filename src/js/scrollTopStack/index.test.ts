@@ -24,3 +24,15 @@ test("Pushing and popping works for one number", () => {
   expect(stack.size()).toStrictEqual(0);
   expect(stack.isEmpty()).toStrictEqual(true);
 });
+
+test("Calling reset empties the stack and resets values", () => {
+  const stack = new ScrollTopStack();
+  stack.push(42);
+
+  expect(stack.size()).toStrictEqual(1);
+  expect(stack.isEmpty()).toStrictEqual(false);
+
+  stack.reset();
+  expect(stack.size()).toStrictEqual(0);
+  expect(stack.isEmpty()).toStrictEqual(true);
+});
